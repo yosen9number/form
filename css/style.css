@@ -6,7 +6,7 @@ body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to top left, #2227ae, #5b4fc6);
 }
-.check-form {
+.reg-form {
     position: absolute;
     top: 0;
     bottom: 0;
