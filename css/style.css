@@ -1,19 +1,16 @@
 body {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 80px 0;
     color: #161a20;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to top left, #2227ae, #5b4fc6);
+    box-sizing: border-box;
 }
-.check-form {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.reg-form {
     width: 450px;
-    height: 500px;
+    min-height: 600px;
     padding: 30px 30px 60px;
     margin: auto;
     border-radius: 6px;
@@ -21,45 +18,89 @@ body {
     box-shadow: 0 10px 20px rgba(24,0,0,0);
     box-sizing: border-box;
 }
-.form__title {
-    margin: 8px 0 20px 20px;
+.form-group {
+    margin-bottom: 22px;
+}
+.form-title {
+    margin: 0 0 40px;
     font-size: 26px;
     font-weight: bold;
     line-height: 1.15;
 }
-.form__item {
-    position: relative;
-    width: 100%;
-    margin-bottom: 22px;
+.form-item {
+    width: 92%;
     padding: 18px 20px;
+    margin-right: 15px;
     font-size: 16px;
     font-weight: 500;
     border-radius: 6px;
     border: 1px solid #b0b7be;
     box-sizing: border-box;
 }
-.required::after {
-    content: '';
+.form-label {
     display: block;
-    height: 24px;
-    width: 24px;
-    margin-left: 15px;
-    background: #161a20;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: 500;
 }
-.form__item[placeholder] {
-    color: #7f8790;
-    font-family: 'Roboto',sans-serif;
+.error {
+    border: 1px solid red;
+}
+.error ~ .error__text {
+    display: block;
+}
+.error__text {
+    display: none;
+    margin: 5px 0;
+    color: red;
+    font-size: 12px;
+}
+.add-phone__text {
+    margin-bottom: 22px;
+}
+.add-phone__btn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 38px;
+    height: 38px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #161a20;
+    border-radius: 6px;
+    border: 1px solid #b0b7be;
+    background-color: #fff;
+}
+.add-phone__btn:active, .add-phone__btn:focus {
+    outline: none;
+}
+.add-phone__btn:active {
+    border: 2px solid #b0b7be;
 }
 .main-button {
+    display: block;
     border-radius: 100px;
     width: 300px;
     height: 58px;
+    margin: auto;
     font-size: 16px;
     line-height: 1.75;
+    cursor: pointer;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     border: none;
     background: #FFC638;
+}
+.main-button:hover {
+    background: #ffd347;
+}
+.main-button:focus {
+    outline: none;
+}
+.main-button:active {
+    background: #B48100;
+    outline: none;
 }
