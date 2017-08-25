@@ -19,7 +19,18 @@ body {
     box-sizing: border-box;
 }
 .form-group {
+    position: relative;
     margin-bottom: 22px;
+}
+.required::after {
+    content: '*';
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    display: block;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
 }
 .form-title {
     margin: 0 0 40px;
@@ -66,7 +77,7 @@ body {
     height: 38px;
     margin-left: 10px;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 24px;
     color: #161a20;
     border-radius: 6px;
     border: 1px solid #b0b7be;
