@@ -9,28 +9,25 @@
 <body>
     <form id="form" name="reg" class="reg-form" action=""  method="post">
         <p class="form-title">Форма регистрации</p>
-        <div class="form-group">
+        <div class="form-group required">
             <label class="form-label" for="name">Введите Ф.И.О.:</label>
             <input name="name" id="name" class="form-item" type="text" required>
-            <img class="required" src="img/required.png" width="10" height="10">
             <span class="error__text">* Имя должно содержать только буквы и дефисы, минимум два слова</span>
         </div>
-        <div class="form-group">
+        <div class="form-group required">
             <label class="form-label" for="email">Email:</label>
             <input name="email" id="email" class="form-item required" type="email" required>
-            <img class="required" src="img/required.png" width="10" height="10">
             <span class="error__text">* Некорректно введен e-mail</span>
         </div>
-        <div class="form-group">
-            <label class="form-label" for="tel">Телефон:</label>
-            <input name="tel" id="tel" class="form-item" type="tel" required>
-            <img class="required" src="img/required.png" width="10" height="10">
+        <div class="form-group required">
+            <label class="form-label" for="phone">Телефон:</label>
+            <input name="phone" id="phone" class="form-item" type="tel" required>
             <span class="error__text">* Некорректно введен телефон</span>
         </div>
         <div class="add-phone">
             <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" type="button">+</button></p>
         </div>
-        <input class="main-button" type="button" onclick="valid(document.getElementById('form'))" value="Отправить">
+        <button class="main-button" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
     </form>
 <script src="script/script.js"></script>
 </body>
