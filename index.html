@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form" name="reg" class="reg-form" action=""  method="post">
-        <p class="form-title">Форма регистрации</p>
+        <p class="title">Форма регистрации</p>
         <div class="form-group required">
             <label class="form-label" for="name">Введите Ф.И.О.:</label>
             <input name="name" id="name" class="form-item" type="text" required>
@@ -25,10 +25,21 @@
             <span class="error__text">* Некорректно введен телефон</span>
         </div>
         <div class="add-phone">
-            <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" type="button">+</button></p>
+            <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" title="Добавить" type="button">+</button></p>
         </div>
-        <button class="main-button" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
+        <button class="main__btn" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
     </form>
+    <div id="modal" class="modal__block-page">
+        <div class="modal__box">
+            <button title="Закрыть" class="close__btn">+</button>
+            <h2 class="title">Вы прошли регистрацию</h2>
+            <div class="options">
+                <div class="option"><span class="option__name">Имя:</span> Значение</div>
+                <div class="option"><span class="option__name">Email:</span> Значение</div>
+                <div class="option"><span class="option__name">Телефон:</span> Значение, значение</div>
+            </div>
+        </div>
+    </div>
 <script src="script/script.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+button:focus {
+    outline: none;
+}
 body {
     position: relative;
     min-height: 100vh;
@@ -20,7 +23,7 @@ body {
 }
 .form-group {
     position: relative;
-    margin-bottom: 22px;
+    margin-bottom: 25px;
 }
 .required::after {
     content: '*';
@@ -32,7 +35,7 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
-.form-title {
+.title {
     margin: 0 0 40px;
     font-size: 26px;
     font-weight: bold;
@@ -47,6 +50,11 @@ body {
     border-radius: 6px;
     border: 1px solid #b0b7be;
     box-sizing: border-box;
+}
+.form-item:focus {
+    outline: none;
+    border: 1px solid #5B4FC6;
+    box-shadow: 0 0 1px #5B4FC6;
 }
 .form-label {
     display: block;
@@ -63,9 +71,10 @@ body {
 }
 .error__text {
     display: none;
+    position: absolute;
     margin: 5px 0;
     color: red;
-    font-size: 12px;
+    font-size: 11px;
 }
 .add-phone__text {
     margin-bottom: 22px;
@@ -83,13 +92,10 @@ body {
     border: 1px solid #b0b7be;
     background-color: #fff;
 }
-.add-phone__btn:active, .add-phone__btn:focus {
-    outline: none;
-}
 .add-phone__btn:active {
     border: 2px solid #b0b7be;
 }
-.main-button {
+.main__button {
     display: block;
     border-radius: 100px;
     width: 300px;
@@ -105,13 +111,62 @@ body {
     border: none;
     background: #FFC638;
 }
-.main-button:hover {
+.main__button:hover {
     background: #ffd347;
 }
-.main-button:focus {
+.main__button:focus {
     outline: none;
 }
-.main-button:active {
+.main__button:active {
     background: #B48100;
-    outline: none;
+
+}
+.modal__block-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.modal__box {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 300px;
+    padding: 40px 20px;
+    margin: auto;
+    border-radius: 6px;
+    background: #fff;
+}
+.modal__box .title {
+    font-size: 22px;
+}
+.close__btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    padding: 0;
+    border: 0;
+    font-size: 30px;
+    color: #a0a0a0;
+    cursor: pointer;
+    background: none;
+    transform: rotate(45deg);
+}
+.close__btn:hover {
+    color: #787878;
+}
+.close__btn:focus {
+    color: #000000;
+}
+.option {
+    margin-bottom: 10px;
+}
+.option__name {
+    margin-right: 6px;
+    font-weight: bold;
 }
