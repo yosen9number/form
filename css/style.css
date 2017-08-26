@@ -95,7 +95,7 @@ body {
 .add-phone__btn:active {
     border: 2px solid #b0b7be;
 }
-.main__button {
+.main__btn {
     display: block;
     border-radius: 100px;
     width: 300px;
@@ -111,13 +111,13 @@ body {
     border: none;
     background: #FFC638;
 }
-.main__button:hover {
+.main__btn:hover {
     background: #ffd347;
 }
-.main__button:focus {
+.main__btn:focus {
     outline: none;
 }
-.main__button:active {
+.main__btn:active {
     background: #B48100;
 
 }
