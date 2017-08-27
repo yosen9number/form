@@ -77,15 +77,23 @@ function valid (form) {
             values = emailValue;
         } else if (element.type === 'tel') {
             text = 'Телефон: ';
-            phoneValue.push(element.value);
-            values = phoneValue;
+            if (element.value === '') {
+                phoneValue.push(element.value);
+                return false;
+                values = phoneValue;
+            } else {
+                phoneValue.push(element.value);
+                values = phoneValue;
+            }
         }
-        
-        option = document.createElement('div');
-        option.className = 'option';
-        option.innerHTML = '<span class="option__name">' + text + '</span>' + values;
-        options.appendChild(option);
     }
+
+    var strValue = values.join(', ');
+    option = document.createElement('div');
+    option.className = 'option';
+    option.innerHTML = '<span class="option__name">' + text + '</span>' + strValue;
+    options.appendChild(option);
+    options.appendChild(option);
 }
 
 
