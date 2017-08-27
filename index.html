@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
 <body>
-    <form id="form" name="reg" class="reg-form" action=""  method="post">
+    <form id="form" name="reg" class="reg-form"  method="post">
         <p class="title">Форма регистрации</p>
         <div class="form-group required">
             <label class="form-label" for="name">Введите Ф.И.О.:</label>
@@ -27,7 +27,7 @@
         <div class="add-phone">
             <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" title="Добавить" type="button">+</button></p>
         </div>
-        <button class="main__btn" type="submit">Отправить</button>
+        <button id="button" class="main__btn" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
     </form>
     <div id="modal-conteiner" class="modal__block-page">
         <div id="modal" class="modal__box">

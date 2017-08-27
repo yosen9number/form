@@ -121,6 +121,7 @@ body {
     background: #B48100;
 
 }
+/*
 .modal__block-page {
     position: absolute;
     top: 0;
@@ -130,11 +131,11 @@ body {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
 }
+*/
 .modal__box {
     position: fixed;
     top: 60px;
     left: 0;
-    right: 0;
     display: block;
     width: 300px;
     padding: 40px 20px;
