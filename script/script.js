@@ -78,9 +78,7 @@ function valid (form) {
         } else if (element.type === 'tel') {
             text = 'Телефон: ';
             if (element.value === '') {
-                phoneValue.push(element.value);
                 return false;
-                values = phoneValue;
             } else {
                 phoneValue.push(element.value);
                 values = phoneValue;
