@@ -15,20 +15,22 @@ var elements = document.querySelectorAll('input');
         var name = element.getAttribute('name');
         value = element.value;
 
-        if ( name === 'name') {
-            pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
-        } else if (type === 'email') {
-            pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
-        } else if (type === 'tel') {
-            pattern = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-        }
+        document.querySelector('form').addEventListener('change', function (event) {
+            var target = event.target;
 
-        document.querySelector('form').addEventListener('change', function (element, pattern, value) {
-            if (!pattern.test(value)) {
-                element.classList.add('error');
+            if ( target.name === 'name') {
+                pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
+            } else if (target.type === 'email') {
+                pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
+            } else if (target.type === 'tel') {
+                pattern = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+            }
+
+            if (!pattern.test(target.value)) {
+                target.classList.add('error');
                 return false;
             } else {
-                element.classList.remove('error');
+                target.classList.remove('error');
                 return true;
             }
         });
