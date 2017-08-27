@@ -80,6 +80,7 @@ function valid (form) {
             phoneValue.push(element.value);
             values = phoneValue;
         }
+        
         option = document.createElement('div');
         option.className = 'option';
         option.innerHTML = '<span class="option__name">' + text + '</span>' + values;
