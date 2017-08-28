@@ -19,7 +19,6 @@ var elements = document.querySelectorAll('input');
 
 for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
-    var type = element.getAttribute('type');
     var name = element.getAttribute('name');
     value = element.value;
 
@@ -65,33 +64,53 @@ for (var i = 0; i < elements.length; i++) {
 
 function valid (form) {
     elements = document.querySelectorAll('input');
-    for (var i = 0; i < elements.length; i++) {
-        element = elements[i];
-        if ( element.name === 'name') {
-            text = 'Имя:';
-            nameValue.push(element.value);
-            values = nameValue;
-        } else if (element.type === 'email') {
-            text = 'Email: ';
-            emailValue.push(element.value);
-            values = emailValue;
-        } else if (element.type === 'tel') {
-            text = 'Телефон: ';
-            if (element.value === '') {
-                return false;
+    var data = getDataFromInputs(elements);
+    var container = document.getElementById('modal-conteiner');
+    var close = document.getElementById('close');
+    container.style.display = 'block';
+
+    close.addEventListener('click', function() {
+        container.style.display = 'none';
+    });
+
+    function getDataFromInputs(elements) {
+        for (var i = 0; i < elements.length; i++) {
+            element = elements[i];
+            if (element.name === 'name') {
+                text = 'Имя:';
+                nameValue.push(element.value);
+                values = nameValue;
+            } else if (element.type !== 'email') {
+                if (element.type === 'tel') {
+                    text = 'Телефон: ';
+                    if (element.value === '') {
+                        return false;
+                    } else {
+                        phoneValue.push(element.value);
+                        values = phoneValue;
+                    }
+                }
             } else {
-                phoneValue.push(element.value);
-                values = phoneValue;
+                text = 'Email: ';
+                emailValue.push(element.value);
+                values = emailValue;
             }
         }
     }
 
-    var strValue = values.join(', ');
-    option = document.createElement('div');
-    option.className = 'option';
-    option.innerHTML = '<span class="option__name">' + text + '</span>' + strValue;
-    options.appendChild(option);
-    options.appendChild(option);
+
+    function renderSuccessMode(data) {
+
+    }
+
+    renderSuccessMode(data);
+    /*
+        var strValue = values.join(', ');
+        option = document.createElement('div');
+        option.className = 'option';
+        option.innerHTML = '<span class="option__name">' + text + '</span>' + strValue;
+        options.appendChild(option);
+*/
 }
 
 
