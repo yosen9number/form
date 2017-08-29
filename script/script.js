@@ -4,15 +4,6 @@ var text;
 var value;
 var values = [];
 var pattern;
-var nameValue = [];
-var emailValue = [];
-var phoneValue = [];
-
-var container = document.getElementById('modal-container');
-var modal = document.getElementById('modal');
-var close = modal.querySelector('.close__btn');
-var options = modal.querySelector('.options');
-var option;
 
 var elements = document.querySelectorAll('input');
 
@@ -66,51 +57,52 @@ function valid (form) {
     elements = document.querySelectorAll('input');
     var data = getDataFromInputs(elements);
     var container = document.getElementById('modal-conteiner');
+    var options = document.querySelector('.options');
+    var option;
     var close = document.getElementById('close');
     container.style.display = 'block';
 
     close.addEventListener('click', function() {
         container.style.display = 'none';
+        options.innerHTML = '';
     });
 
     function getDataFromInputs(elements) {
+        var data = {};
+
         for (var i = 0; i < elements.length; i++) {
             element = elements[i];
             if (element.name === 'name') {
                 text = 'Имя:';
-                nameValue.push(element.value);
-                values = nameValue;
-            } else if (element.type !== 'email') {
-                if (element.type === 'tel') {
-                    text = 'Телефон: ';
-                    if (element.value === '') {
-                        return false;
-                    } else {
-                        phoneValue.push(element.value);
-                        values = phoneValue;
-                    }
-                }
+            } else if (element.type === 'email') {
+                text = 'Email:';
+            } else if (element.type === 'tel') {
+                text = 'Телефон:';
+            }
+
+
+            if (text in data) {
+                values.push(element.value);
+                data[text] = values.join(', ');
             } else {
-                text = 'Email: ';
-                emailValue.push(element.value);
-                values = emailValue;
+                values = [element.value];
+                data[text] = values;
             }
         }
+        return data;
     }
 
 
     function renderSuccessMode(data) {
-
+        for (var key in data) {
+            option = document.createElement('div');
+            option.className = 'option';
+            option.innerHTML = '<span class="option__name">' + key + '</span>' +  data[key];
+            options.appendChild(option);
+        }
     }
 
     renderSuccessMode(data);
-    /*
-        var strValue = values.join(', ');
-        option = document.createElement('div');
-        option.className = 'option';
-        option.innerHTML = '<span class="option__name">' + text + '</span>' + strValue;
-        options.appendChild(option);
-*/
 }
 
 
