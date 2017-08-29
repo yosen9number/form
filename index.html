@@ -7,35 +7,35 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
 <body>
-    <form id="form" name="reg" class="reg-form"  method="post">
-        <p class="title">Форма регистрации</p>
-        <div class="form-group required">
-            <label class="form-label" for="name">Введите Ф.И.О.:</label>
-            <input name="name" id="name" class="form-item" type="text" required>
-            <span class="error__text">* Имя должно содержать только буквы и дефисы, минимум два слова</span>
-        </div>
-        <div class="form-group required">
-            <label class="form-label" for="email">Email:</label>
-            <input name="email" id="email" class="form-item required" type="email" required>
-            <span class="error__text">* Некорректно введен e-mail</span>
-        </div>
-        <div class="form-group required">
-            <label class="form-label" for="phone">Телефон:</label>
-            <input name="phone" id="phone" class="form-item" type="tel" required>
-            <span class="error__text">* Некорректно введен телефон</span>
-        </div>
-        <div class="add-phone">
-            <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" title="Добавить" type="button">+</button></p>
-        </div>
-        <button id="button" class="main__btn" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
-    </form>
-    <div id="modal-conteiner" class="modal__block-page">
-        <div id="modal" class="modal__box">
-            <button title="Закрыть" class="close__btn">+</button>
-            <h2 class="title">Вы прошли регистрацию</h2>
-            <div class="options"></div>
-        </div>
+<form id="form" name="reg" class="reg-form"  method="post">
+    <p class="title">Форма регистрации</p>
+    <div class="form-group required">
+        <label class="form-label" for="name">Введите Ф.И.О.:</label>
+        <input name="name" id="name" class="form-item" type="text" required>
+        <span class="error__text">* Имя должно содержать только буквы и дефисы, минимум два слова</span>
     </div>
+    <div class="form-group required">
+        <label class="form-label" for="email">Email:</label>
+        <input name="email" id="email" class="form-item required" type="email" required>
+        <span class="error__text">* Некорректно введен e-mail</span>
+    </div>
+    <div class="form-group required">
+        <label class="form-label" for="phone">Телефон:</label>
+        <input name="phone" id="phone" class="form-item" type="tel" required>
+        <span class="error__text">* Некорректно введен телефон</span>
+    </div>
+    <div class="add-phone">
+        <p class="add-phone__text">Дополнительный телефон <button class="add-phone__btn" title="Добавить" type="button">+</button></p>
+    </div>
+    <button id="button" class="main__btn" type="button" onclick="valid(document.getElementById('form'))">Отправить</button>
+</form>
+<div id="modal-conteiner" class="modal__block-page">
+    <div id="modal" class="modal__box">
+        <button id="close" title="Закрыть" class="close__btn">+</button>
+        <h2 class="title">Вы прошли регистрацию</h2>
+        <div class="options"></div>
+    </div>
+</div>
 <script src="script/script.js"></script>
 </body>
 </html>
