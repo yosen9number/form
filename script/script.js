@@ -34,6 +34,7 @@ for (var i = 0; i < elements.length; i++) {
             target.classList.remove('error');
             return true;
         }
+
     });
 
 }
@@ -103,4 +104,5 @@ function valid (form) {
     }
 
     renderSuccessMode(data);
+    return false;
 }
