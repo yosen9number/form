@@ -55,6 +55,7 @@ for (var i = 0; i < elements.length; i++) {
 
 function valid (form) {
     elements = document.querySelectorAll('input');
+<<<<<<< HEAD
     var data = getDataFromInputs(elements);
     var container = document.getElementById('modal-conteiner');
     var options = document.querySelector('.options');
@@ -103,8 +104,30 @@ function valid (form) {
     }
 
     renderSuccessMode(data);
+=======
+    for (var i = 0; i < elements.length; i++) {
+        element = elements[i];
+        if ( element.name === 'name') {
+            text = 'Имя:';
+            nameValue.push(element.value);
+            values = nameValue;
+        } else if (element.type === 'email') {
+            text = 'Email: ';
+            emailValue.push(element.value);
+            values = emailValue;
+        } else if (element.type === 'tel') {
+            text = 'Телефон: ';
+            phoneValue.push(element.value);
+            values = phoneValue;
+        }
+        var strValue = values.join(', ');
+        option = document.createElement('div');
+        option.className = 'option';
+        option.innerHTML = '<span class="option__name">' + text + '</span>' + strValue;
+        options.appendChild(option);
+    }
+>>>>>>> refs/remotes/origin/master
 }
-
 
 
 
