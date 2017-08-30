@@ -35,7 +35,8 @@
         }
     });
 
-    function validateForm() {
+    function validateForm(elements) {
+        var stopSubmit;
         elements = document.querySelectorAll('input');
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
@@ -43,11 +44,13 @@
                 element.classList.remove('error');
             }
             if (element.classList.contains('error')) {
-                return false;
+                stopSubmit = true;
+                break;
             } else {
-                container.style.display = 'block';
+                stopSubmit = false;
             }
         }
+        return stopSubmit;
     }
 
     function getDataFromInputs(elements) {
@@ -89,9 +92,13 @@
 
     form.addEventListener('submit', function (event) {
         var data = getDataFromInputs(elements);
+        var stopSubmit = validateForm(elements);
         event.preventDefault();
-        validateForm();
-        renderSuccessMode(data);
+
+        if (!stopSubmit) {
+            container.style.display = 'block';
+            renderSuccessMode(data);
+        }
     });
 })();
 
