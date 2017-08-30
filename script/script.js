@@ -1,25 +1,13 @@
 (function () {
     var form = document.getElementById('form');
-
-    var text;
-    var value;
-    var values = [];
-    var pattern;
-
     var container = document.getElementById('modal-conteiner');
     var options = document.querySelector('.options');
-    var option;
-
     var plus = document.querySelector('.add-phone__btn');
-    var newPhone;
-
     var close = document.getElementById('close');
-
     var elements = document.querySelectorAll('input');
 
-
     plus.addEventListener('click', function() {
-        newPhone = document.createElement('div');
+        var newPhone = document.createElement('div');
         newPhone.className = 'form-group';
         newPhone.innerHTML = '<input class="form-item" type="tel">' +
             '<span class="error__text">* Некорректно введен телефон</span>';
@@ -30,33 +18,45 @@
         container.style.display = 'none';
         options.innerHTML = '';
     });
-
     form.addEventListener('change', function(event) {
+        var pattern;
         var target = event.target;
-
+        target.classList.remove('error');
         if ( target.name === 'name') {
             pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
         } else if (target.type === 'email') {
             pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
         } else if (target.type === 'tel') {
-            pattern = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+            pattern = /^((\d|\+)[\- ]?)?(\(?\d\)?[\- ]?){1,25}$/;
         }
-
         if (!pattern.test(target.value)) {
             target.classList.add('error');
             return false;
-        } else {
-            target.classList.remove('error');
-            return true;
         }
     });
 
+    function validateForm() {
+        elements = document.querySelectorAll('input');
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element.value === '') {
+                element.classList.remove('error');
+            }
+            if (element.classList.contains('error')) {
+                return false;
+            } else {
+                container.style.display = 'block';
+            }
+        }
+    }
+
     function getDataFromInputs(elements) {
         elements = document.querySelectorAll('input');
-        data = {};
-
+        var data = {};
+        var values = [];
+        var text;
         for (var i = 0; i < elements.length; i++) {
-            element = elements[i];
+            var element = elements[i];
             if (element.name === 'name') {
                 text = 'Имя:';
             } else if (element.type === 'email') {
@@ -66,8 +66,10 @@
             }
 
             if (text in data) {
-                values.push(element.value);
-                data[text] = values.join(', ');
+                if (!(element.value === '')) {
+                    values.push(element.value);
+                    data[text] = values.join(', ');
+                }
             } else {
                 values = [element.value];
                 data[text] = values;
@@ -78,44 +80,19 @@
 
     function renderSuccessMode(data) {
         for (var key in data) {
-            option = document.createElement('div');
+            var option = document.createElement('div');
             option.className = 'option';
             option.innerHTML = '<span class="option__name">' + key + '</span>' +  data[key];
             options.appendChild(option);
         }
     }
-/*
-    form.onsubmit = function (event) {
+
+    form.addEventListener('submit', function (event) {
         var data = getDataFromInputs(elements);
-        container.style.display = 'block';
-
+        event.preventDefault();
+        validateForm();
         renderSuccessMode(data);
-        return false;
-    }
-  */
-    form.addEventListener('submit', function (e) {
-        var data = getDataFromInputs(elements);
-
-        e.preventDefault();
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-
-            if (element.classList.contains('error') || element.value === '') {
-                if (element.hasAttribute('required')) {
-                    return false;
-                } else {
-                    element.value = false;
-                }
-            }
-             else {
-                container.style.display = 'block';
-            }
-        }
-
-        renderSuccessMode(data);
-
     });
-
 })();
 
 
