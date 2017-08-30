@@ -51,18 +51,6 @@
         }
     });
 
-    function validateForm() {
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-
-            if (element.hasAttribute('required') && element.classList.contains('error')) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
     function getDataFromInputs(elements) {
         elements = document.querySelectorAll('input');
         data = {};
@@ -76,7 +64,6 @@
             } else if (element.type === 'tel') {
                 text = 'Телефон:';
             }
-
 
             if (text in data) {
                 values.push(element.value);
@@ -97,7 +84,7 @@
             options.appendChild(option);
         }
     }
-
+/*
     form.onsubmit = function (event) {
         var data = getDataFromInputs(elements);
         container.style.display = 'block';
@@ -105,6 +92,30 @@
         renderSuccessMode(data);
         return false;
     }
+  */
+    form.addEventListener('submit', function (e) {
+        var data = getDataFromInputs(elements);
+
+        e.preventDefault();
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+
+            if (element.classList.contains('error') || element.value === '') {
+                if (element.hasAttribute('required')) {
+                    return false;
+                } else {
+                    element.value = false;
+                }
+            }
+             else {
+                container.style.display = 'block';
+            }
+        }
+
+        renderSuccessMode(data);
+
+    });
+
 })();
 
 
