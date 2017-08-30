@@ -18,6 +18,7 @@
         container.style.display = 'none';
         options.innerHTML = '';
     });
+
     form.addEventListener('change', function(event) {
         var pattern;
         var target = event.target;
@@ -35,19 +36,22 @@
         }
     });
 
-    function validateForm() {
+    function validateForm(elements) {
+        var stopSubmit;
         elements = document.querySelectorAll('input');
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
             if (element.value === '') {
                 element.classList.remove('error');
             }
-            if (element.classList.contains('error')) {
-                return false;
+            if (element.classList.contains('error') && element.hasAttribute('required')) {
+                stopSubmit = true;
+                break;
             } else {
-                container.style.display = 'block';
+                stopSubmit = false;
             }
         }
+        return stopSubmit;
     }
 
     function getDataFromInputs(elements) {
@@ -66,7 +70,7 @@
             }
 
             if (text in data) {
-                if (!(element.value === '')) {
+                if (!((element.value === '') || element.classList.contains('error'))) {
                     values.push(element.value);
                     data[text] = values.join(', ');
                 }
@@ -89,9 +93,13 @@
 
     form.addEventListener('submit', function (event) {
         var data = getDataFromInputs(elements);
+        var stopSubmit = validateForm(elements);
         event.preventDefault();
-        validateForm();
-        renderSuccessMode(data);
+
+        if (!stopSubmit) {
+            container.style.display = 'block';
+            renderSuccessMode(data);
+        }
     });
 })();
 
