@@ -4,14 +4,17 @@
     var options = document.querySelector('.options');
     var plus = document.querySelector('.add-phone__btn');
     var close = document.getElementById('close');
-    var elements = document.querySelectorAll('input');
+
 
     plus.addEventListener('click', function() {
         var newPhone = document.createElement('div');
+        var textError = document.createElement('span');
         newPhone.className = 'form-group';
-        newPhone.innerHTML = '<input class="form-item" type="tel">' +
-            '<span class="error__text">* Некорректно введен телефон</span>';
+        textError.className = 'error__text';
+        newPhone.innerHTML = '<input class="form-item" type="tel">';
+        textError.innerText = '* Некорректно введен телефон';
         plus.parentNode.parentNode.appendChild(newPhone);
+        newPhone.appendChild(textError);
     });
 
     close.addEventListener('click', function() {
@@ -23,28 +26,31 @@
         var pattern;
         var target = event.target;
         target.classList.remove('error');
-        if ( target.name === 'name') {
-            pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
-        } else if (target.type === 'email') {
-            pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
-        } else if (target.type === 'tel') {
-            pattern = /^((\d|\+)[\- ]?)?(\(?\d\)?[\- ]?){1,25}$/;
+        switch (target.type) {
+            case 'text' :
+                pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
+                break;
+            case 'email' :
+                pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
+                break;
+            case 'tel' :
+                pattern = /^((\d|\+)[\- ]?)?(\(?\d\)?[\- ]?){1,25}$/;
+                break;
         }
-        if (!pattern.test(target.value)) {
+        if (pattern.test(target.value)) {
+        } else {
             target.classList.add('error');
-            return false;
         }
     });
 
-    function validateForm(elements) {
+    function validateInputs(inputs) {
         var stopSubmit;
-        elements = document.querySelectorAll('input');
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-            if (element.value === '') {
-                element.classList.remove('error');
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (input.value === '') {
+                input.classList.remove('error');
             }
-            if (element.classList.contains('error') && element.hasAttribute('required')) {
+            if (input.classList.contains('error') && input.hasAttribute('required')) {
                 stopSubmit = true;
                 break;
             } else {
@@ -54,35 +60,38 @@
         return stopSubmit;
     }
 
-    function getDataFromInputs(elements) {
-        elements = document.querySelectorAll('input');
+    function getDataFromInputs(inputs) {
         var data = {};
         var values = [];
         var text;
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-            if (element.name === 'name') {
-                text = 'Имя:';
-            } else if (element.type === 'email') {
-                text = 'Email:';
-            } else if (element.type === 'tel') {
-                text = 'Телефон:';
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            switch (input.type) {
+                case 'text' :
+                    text = 'Имя:';
+                    break;
+                case 'email' :
+                    text = 'Email:';
+                    break;
+                case 'tel' :
+                    text = 'Телефон:';
+                    break;
             }
 
             if (text in data) {
-                if (!((element.value === '') || element.classList.contains('error'))) {
-                    values.push(element.value);
+                if (!((input.value === '') || input.classList.contains('error'))) {
+                    values.push(input.value);
                     data[text] = values.join(', ');
                 }
             } else {
-                values = [element.value];
+                values = [input.value];
                 data[text] = values;
             }
         }
         return data;
     }
 
-    function renderSuccessMode(data) {
+    function renderSuccessModal(data) {
         for (var key in data) {
             var option = document.createElement('div');
             option.className = 'option';
@@ -92,13 +101,14 @@
     }
 
     form.addEventListener('submit', function (event) {
-        var data = getDataFromInputs(elements);
-        var stopSubmit = validateForm(elements);
         event.preventDefault();
+        var inputs = document.querySelectorAll('input');
+        var data = getDataFromInputs(inputs);
+        var stopSubmit = validateInputs(inputs);
 
         if (!stopSubmit) {
             container.style.display = 'block';
-            renderSuccessMode(data);
+            renderSuccessModal(data);
         }
     });
 })();
