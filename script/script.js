@@ -4,14 +4,17 @@
     var options = document.querySelector('.options');
     var plus = document.querySelector('.add-phone__btn');
     var close = document.getElementById('close');
-    var elements = document.querySelectorAll('input');
+
 
     plus.addEventListener('click', function() {
         var newPhone = document.createElement('div');
+        var textError = document.createElement('span');
         newPhone.className = 'form-group';
-        newPhone.innerHTML = '<input class="form-item" type="tel">' +
-            '<span class="error__text">* Некорректно введен телефон</span>';
+        textError.className = 'error__text';
+        newPhone.innerHTML = '<input class="form-item" type="tel">';
+        textError.innerText = '* Некорректно введен телефон';
         plus.parentNode.parentNode.appendChild(newPhone);
+        newPhone.appendChild(textError);
     });
 
     close.addEventListener('click', function() {
@@ -32,19 +35,17 @@
         }
         if (!pattern.test(target.value)) {
             target.classList.add('error');
-            return false;
         }
     });
 
-    function validateForm(elements) {
+    function validateInputs(inputs) {
         var stopSubmit;
-        elements = document.querySelectorAll('input');
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-            if (element.value === '') {
-                element.classList.remove('error');
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (input.value === '') {
+                input.classList.remove('error');
             }
-            if (element.classList.contains('error') && element.hasAttribute('required')) {
+            if (input.classList.contains('error') && input.hasAttribute('required')) {
                 stopSubmit = true;
                 break;
             } else {
@@ -54,35 +55,34 @@
         return stopSubmit;
     }
 
-    function getDataFromInputs(elements) {
-        elements = document.querySelectorAll('input');
+    function getDataFromInputs(inputs) {
         var data = {};
         var values = [];
         var text;
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i];
-            if (element.name === 'name') {
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (input.name === 'name') {
                 text = 'Имя:';
-            } else if (element.type === 'email') {
+            } else if (input.type === 'email') {
                 text = 'Email:';
-            } else if (element.type === 'tel') {
+            } else if (input.type === 'tel') {
                 text = 'Телефон:';
             }
 
             if (text in data) {
-                if (!((element.value === '') || element.classList.contains('error'))) {
-                    values.push(element.value);
+                if (!((input.value === '') || input.classList.contains('error'))) {
+                    values.push(input.value);
                     data[text] = values.join(', ');
                 }
             } else {
-                values = [element.value];
+                values = [input.value];
                 data[text] = values;
             }
         }
         return data;
     }
 
-    function renderSuccessMode(data) {
+    function renderSuccessModal(data) {
         for (var key in data) {
             var option = document.createElement('div');
             option.className = 'option';
@@ -92,13 +92,14 @@
     }
 
     form.addEventListener('submit', function (event) {
-        var data = getDataFromInputs(elements);
-        var stopSubmit = validateForm(elements);
         event.preventDefault();
+        var inputs = document.querySelectorAll('input');
+        var data = getDataFromInputs(inputs);
+        var stopSubmit = validateInputs(inputs);
 
         if (!stopSubmit) {
             container.style.display = 'block';
-            renderSuccessMode(data);
+            renderSuccessModal(data);
         }
     });
 })();
