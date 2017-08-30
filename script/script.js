@@ -39,13 +39,12 @@
         } else if (target.type === 'email') {
             pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
         } else if (target.type === 'tel') {
-            pattern = /^(\+)?([-() \d]+){3,}/;
+            pattern = /^\+?[-() \d]{3,}/;
         }
-
         if (!pattern.test(target.value)) {
             target.classList.add('error');
             return false;
-        } else {
+        } else if (pattern.test(target.value) || (target.value === '')) {
             target.classList.remove('error');
             return true;
         }
@@ -56,7 +55,7 @@
         data = {};
 
         for (var i = 0; i < elements.length; i++) {
-            element = elements[i];
+            var element = elements[i];
             if (element.name === 'name') {
                 text = 'Имя:';
             } else if (element.type === 'email') {
@@ -66,8 +65,10 @@
             }
 
             if (text in data) {
-                values.push(element.value);
-                data[text] = values.join(', ');
+                if (!(element.value === '')) {
+                    values.push(element.value);
+                    data[text] = values.join(', ');
+                }
             } else {
                 values = [element.value];
                 data[text] = values;
@@ -84,34 +85,20 @@
             options.appendChild(option);
         }
     }
-/*
-    form.onsubmit = function (event) {
-        var data = getDataFromInputs(elements);
-        container.style.display = 'block';
-
-        renderSuccessMode(data);
-        return false;
-    }
-  */
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function (event) {
         var data = getDataFromInputs(elements);
 
-        e.preventDefault();
+        event.preventDefault();
+        elements = document.querySelectorAll('input');
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
 
-            if (element.classList.contains('error') || element.value === '') {
-                if (element.hasAttribute('required')) {
-                    return false;
-                } else {
-                    element.value = false;
-                }
-            }
-             else {
+            if (element.classList.contains('error')) {
+                return false;
+            } else {
                 container.style.display = 'block';
             }
         }
-
         renderSuccessMode(data);
 
     });
