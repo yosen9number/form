@@ -39,7 +39,7 @@
         } else if (target.type === 'email') {
             pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
         } else if (target.type === 'tel') {
-            pattern = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+            pattern = /^(\+)?([-() \d]+){3,}/;
         }
 
         if (!pattern.test(target.value)) {
