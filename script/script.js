@@ -18,6 +18,7 @@
         container.style.display = 'none';
         options.innerHTML = '';
     });
+
     form.addEventListener('change', function(event) {
         var pattern;
         var target = event.target;
@@ -43,7 +44,7 @@
             if (element.value === '') {
                 element.classList.remove('error');
             }
-            if (element.classList.contains('error')) {
+            if (element.classList.contains('error') && element.hasAttribute('required')) {
                 stopSubmit = true;
                 break;
             } else {
@@ -69,7 +70,7 @@
             }
 
             if (text in data) {
-                if (!(element.value === '')) {
+                if (!((element.value === '') || element.classList.contains('error'))) {
                     values.push(element.value);
                     data[text] = values.join(', ');
                 }
