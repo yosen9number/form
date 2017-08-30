@@ -26,14 +26,19 @@
         var pattern;
         var target = event.target;
         target.classList.remove('error');
-        if ( target.name === 'name') {
-            pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
-        } else if (target.type === 'email') {
-            pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
-        } else if (target.type === 'tel') {
-            pattern = /^((\d|\+)[\- ]?)?(\(?\d\)?[\- ]?){1,25}$/;
+        switch (target.type) {
+            case 'text' :
+                pattern = /^([a-zA-Zа-яА-ЯёЁ\-]+) ([a-zA-Zа-яА-ЯёЁ\-]+)/;
+                break;
+            case 'email' :
+                pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z]{2,6})$/;
+                break;
+            case 'tel' :
+                pattern = /^((\d|\+)[\- ]?)?(\(?\d\)?[\- ]?){1,25}$/;
+                break;
         }
-        if (!pattern.test(target.value)) {
+        if (pattern.test(target.value)) {
+        } else {
             target.classList.add('error');
         }
     });
@@ -61,12 +66,16 @@
         var text;
         for (var i = 0; i < inputs.length; i++) {
             var input = inputs[i];
-            if (input.name === 'name') {
-                text = 'Имя:';
-            } else if (input.type === 'email') {
-                text = 'Email:';
-            } else if (input.type === 'tel') {
-                text = 'Телефон:';
+            switch (input.type) {
+                case 'text' :
+                    text = 'Имя:';
+                    break;
+                case 'email' :
+                    text = 'Email:';
+                    break;
+                case 'tel' :
+                    text = 'Телефон:';
+                    break;
             }
 
             if (text in data) {
